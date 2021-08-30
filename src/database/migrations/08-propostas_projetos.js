@@ -1,15 +1,15 @@
 exports.up = function (knex) {
   return knex.schema.createTable('propostas_projetos', (table) => {
-    table.increments('id_proposta_projeto').primary();
+    table.uuid('id_proposta_projeto').primary();
 
     table
-      .integer('id_proposta')
+      .uuid('id_proposta')
       .references('id_proposta')
       .inTable('propostas')
       .notNullable();
 
     table
-      .integer('id_projeto')
+      .uuid('id_projeto')
       .references('id_projeto')
       .inTable('projetos')
       .notNullable();

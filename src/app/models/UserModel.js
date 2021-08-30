@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const connection = require('../../database/connection');
 
 class UserModel {
@@ -18,7 +19,7 @@ class UserModel {
 
   async create(body) {
     const userBody = {
-      id_usuario: 455415,
+      id_usuario: uuidv4(),
       email: body.email,
       senha: body.senha,
       nome: body.nome,
@@ -53,6 +54,17 @@ class UserModel {
     const row = await connection('usuarios').returning('*').insert(userBody);
 
     return row;
+  }
+
+  // async update(id){
+  //   const
+  // }
+
+  async delete(id) {
+    const deleteOp = await connection('usuarios')
+      .where('id_usuario', id).del();
+
+    return deleteOp;
   }
 }
 

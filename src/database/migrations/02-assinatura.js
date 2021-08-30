@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('assinaturas', (table) => {
-    table.increments('id_assinatura').primary();
+    table.uuid('id_assinatura').primary();
     table.string('nome', 45);
   });
 };

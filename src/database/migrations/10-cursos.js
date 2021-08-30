@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('cursos', (table) => {
-    table.increments('id_curso').primary();
+    table.uuid('id_curso').primary();
     table.string('nome', 45).notNullable();
     table.string('descricao', 45).notNullable();
     table.string('pre_requisitos', 45);
@@ -10,13 +10,13 @@ exports.up = function (knex) {
     table.boolean('is_aprovado').notNullable();
 
     table
-      .integer('id_categoria_curso')
+      .uuid('id_categoria_curso')
       .references('id_categoria_curso')
       .inTable('categoria_cursos')
       .notNullable();
 
     table
-      .integer('id_professor')
+      .uuid('id_professor')
       .references('id_usuario')
       .inTable('usuarios')
       .notNullable();

@@ -27,24 +27,28 @@ class UserController {
 
     // verifica se contato ja existe com mesmo e-mail
     console.log(userBody.email);
-    const contactExists = await UserModel.findByEmail(userBody.email);
+    const userExists = await UserModel.findByEmail(userBody.email);
 
-    if (contactExists) {
+    if (userExists) {
       return res.status(400).json({ error: 'Esse e-mail ja está em uso' });
     }
-    const contact = await UserModel.create(userBody);
+    const user = await UserModel.create(userBody);
 
-    return res.send(contact);
+    return res.send(user);
   }
 
   // Atualizar um usuário
-  update(req, res) {
-    res.send('ok - update');
+  async update(req, res) {
+    res.send('Update');
   }
 
   // Deletar um usuário
-  delete(req, res) {
-    res.send('ok - delete');
+  async delete(req, res) {
+    const { id } = req.params;
+
+    await UserModel.delete(id);
+
+    res.sendStatus(204);
   }
 }
 
