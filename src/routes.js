@@ -7,6 +7,8 @@ const router = Router();
 
 // Authentication
 router.post('/login', AuthController.index);
+router.get('/user', AuthController.user);
+router.post('/logout', AuthController.logout);
 
 // Usuários
 router.get('/usuarios', UserController.index);

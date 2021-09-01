@@ -16,14 +16,40 @@ class AuthController {
 
     const token = jwt.sign({ _id: user.id_usuario }, 'secret');
 
-    res.cookie('jwt', token, {
+    res.cookie('x-access-token', token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    return res.send({
-      message: 'Logado com sucesso',
+    return res.json({
+      auth: true,
+      token,
     });
+  }
+
+  async user(req, res) {
+    try {
+      const token = req.headers.authorization;
+      const claims = jwt.verify(token, 'secret');
+      if (!claims) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const { _id } = claims;
+
+      const { senha, ...data } = await UserModel.findById(_id);
+
+      return res.json(data);
+    } catch (err) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  }
+
+  logout(req, res) {
+    res.cookie('x-access-token', '', {
+      maxAge: 0,
+    });
+
+    res.send('logout success');
   }
 }
 
