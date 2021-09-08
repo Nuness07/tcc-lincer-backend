@@ -16,11 +16,6 @@ class AuthController {
 
     const token = jwt.sign({ _id: user.id_usuario }, 'secret');
 
-    res.cookie('x-access-token', token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
     return res.json({
       auth: true,
       token,
