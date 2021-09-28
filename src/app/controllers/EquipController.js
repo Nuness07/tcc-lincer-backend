@@ -1,18 +1,18 @@
 const { response } = require('express');
-const UserModel = require('../models/UserModel');
+const EquipModel = require('../models/EquipModel');
 
-class UserController {
+class EquipController {
   // Listar todos os usuários
   async index(req, res) {
     console.log('chamou o index');
-    const users = await UserModel.findAll();
+    const users = await EquipModel.findAll();
     res.json(users);
   }
 
   // Listar um usuário em especifico
   async show(req, res) {
     const { id } = req.params;
-    const user = await UserModel.findById(id);
+    const user = await EquipModel.findById(id);
 
     if (!user) {
       return response.status(404).json({ error: 'User Not Found' });
@@ -25,35 +25,24 @@ class UserController {
   async store(req, res) {
     const userBody = req.body;
 
-    // verifica se contato ja existe com mesmo e-mail
-    console.log(userBody.email);
-    const userExists = await UserModel.findByEmail(userBody.email);
-
-    if (userExists) {
-      return res.status(400).json({ error: 'Esse e-mail ja está em uso' });
-    }
-    const user = await UserModel.create(userBody);
+    const user = await EquipModel.create(userBody);
 
     return res.send(user);
   }
 
   // Atualizar um usuário
   async update(req, res) {
-    const { id } = req.params;
-
-    const user = await UserModel.update(id, req.body);
-
-    return res.send(user);
+    res.send('Update');
   }
 
   // Deletar um usuário
   async delete(req, res) {
     const { id } = req.params;
 
-    await UserModel.delete(id);
+    await EquipModel.delete(id);
 
     res.sendStatus(204);
   }
 }
 
-module.exports = new UserController();
+module.exports = new EquipController();

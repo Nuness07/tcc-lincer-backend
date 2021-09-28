@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('equipamentos', (table) => {
     table.uuid('id_equipamento').primary();
-    table.string('nome', 45).notNullable();
+    table.string('nome_equipamento', 45).notNullable();
     table.string('descricao', 45).notNullable();
     table.string('valor_mes', 45).notNullable();
     table.string('especificacoes', 45).notNullable();
@@ -10,9 +10,15 @@ exports.up = function (knex) {
     table.string('modelo', 45).notNullable();
 
     table
-      .uuid('id_empresa')
-      .references('id_usuario')
-      .inTable('usuarios')
+      .uuid('id_empresa_relation')
+      .references('id_empresa')
+      .inTable('empresas')
+      .notNullable();
+
+    table
+      .uuid('id_tipo_equipamento')
+      .references('id_tipo_equipamento')
+      .inTable('tipos_equipamentos')
       .notNullable();
   });
 };
