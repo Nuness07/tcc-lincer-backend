@@ -9,7 +9,7 @@ class UserModel {
 
   async findById(id) {
     let row = {}
-    await connection('usuarios').select(['usuarios.*', 'projetos.* as projetos', 'roteiros.* as roteiros']).where('id_usuario', id).leftJoin('projetos', 'projetos.id_prestador', 'usuarios.id_usuario').leftJoin('roteiros', 'roteiros.id_usuario_relation', 'usuarios.id_usuario').then((data) => {
+    await connection('usuarios').select(['usuarios.*', 'projetos.* as projetos', 'roteiros.* as roteiros']).where('id_usuario', id).leftJoin('projetos', 'projetos.id_contratante', 'usuarios.id_usuario').leftJoin('roteiros', 'roteiros.id_usuario_relation', 'usuarios.id_usuario').then((data) => {
       console.log(data);
       const usuario = {
         id_usuario: data[0].id_usuario,
@@ -61,7 +61,9 @@ class UserModel {
             id_prestador: projeto.id_prestador,
             id_categoria_projeto: projeto.id_categoria_projeto
           };
-          usuario.projetos.push(project)
+          if(usuario.projetos.find(el => el.id_projeto == project.id_projeto) == undefined){
+            usuario.projetos.push(project)
+          }
         }));
       }
       if(data[0].id_roteiro){
@@ -71,7 +73,9 @@ class UserModel {
             nome: roteiro.nome_roteiro,
             texto: roteiro.texto,
           };
-          usuario.roteiros.push(roadMap)
+          if(usuario.roteiros.find(el => el.id_roteiro == roadMap.id_roteiro) == undefined){
+            usuario.roteiros.push(roadMap)
+          }
         }));
       }
       row = usuario;
