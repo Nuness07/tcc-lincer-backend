@@ -17,13 +17,14 @@ class ProjectModel {
     return row;
   }
 
-  // async update(id){
-  //   const
-  // }
+  async update(id, body){
+    await connection('projetos').where('id_projeto', id).update({...body}), [body];
+    console.log(body);
+  }
 
   async delete(id) {
     const deleteOp = await connection('projetos')
-      .where('id_usuario', id).del();
+      .where('id_projeto', id).del();
 
     return deleteOp;
   }

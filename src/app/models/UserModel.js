@@ -53,6 +53,7 @@ class UserModel {
           const project = {
             id_projeto: projeto.id_projeto,
             nome: projeto.nome_projeto,
+            descricao: projeto.descricao,
             habilidades_desejadas: projeto.habilidades_desejadas,
             arquivos: projeto.arquivos,
             preco: projeto.preco,

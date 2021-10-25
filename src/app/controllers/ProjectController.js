@@ -33,7 +33,11 @@ class ProjectController {
 
   // Atualizar um usuário
   async update(req, res) {
-    res.send('Update');
+    const { id } = req.params;
+
+    const user = await ProjectModel.update(id, req.body);
+
+    return res.send(user);
   }
 
   // Deletar um usuário

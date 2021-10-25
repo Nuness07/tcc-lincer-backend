@@ -2,6 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('projetos', (table) => {
     table.uuid('id_projeto').primary();
     table.string('nome_projeto', 45).notNullable();
+    table.string('descricao', 10000).notNullable();
     table.string('habilidades_desejadas', 2000).notNullable();
     table.string('arquivos', 45).notNullable();
     table.string('prazo', 20);
