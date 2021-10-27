@@ -38,6 +38,7 @@ class CompanyModel {
               fotos: equipamento.fotos,
               marca: equipamento.marca,
               modelo: equipamento.modelo,
+              categoria: equipamento.id_tipo_equipamento
             };
             empresa.equipamentos.push(equip);
           }));

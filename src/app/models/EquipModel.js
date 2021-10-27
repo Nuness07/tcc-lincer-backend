@@ -22,7 +22,7 @@ class EquipModel {
       fotos: body.fotos,
       marca: body.marca,
       modelo: body.modelo,
-      id_empresa_relation: body.id_empresa,
+      id_empresa_relation: body.id_empresa_relation,
       id_tipo_equipamento: body.id_tipo_equipamento,
     };
     const row = await connection('equipamentos').returning('*').insert(userBody);

@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const UserController = require('./app/controllers/UserController');
 const AuthController = require('./app/controllers/AuthController');
+const AuthCompanyController = require('./app/controllers/AuthCompanyController');
 
 const CompanyController = require('./app/controllers/CompanyController');
 
@@ -22,6 +23,11 @@ const router = Router();
 router.post('/login', AuthController.index);
 router.get('/user', AuthController.user);
 router.post('/logout', AuthController.logout);
+
+// Authentication Company
+router.post('/login-company', AuthCompanyController.index);
+router.get('/user-company',  AuthCompanyController.user);
+router.post('/logout-company',  AuthCompanyController.logout);
 
 // Usuários
 router.get('/usuarios', UserController.index);
