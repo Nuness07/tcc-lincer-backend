@@ -9,7 +9,7 @@ class UserModel {
 
   async findById(id) {
     let row = {}
-    await connection('usuarios').select(['usuarios.*', 'projetos.* as projetos', 'roteiros.* as roteiros']).where('id_usuario', id).leftJoin('projetos', 'projetos.id_contratante', 'usuarios.id_usuario').leftJoin('roteiros', 'roteiros.id_usuario_relation', 'usuarios.id_usuario').then((data) => {
+    await connection('usuarios').select(['usuarios.*', 'projetos.* as projetos', 'roteiros.* as roteiros', 'cursos.* as cursos']).where('id_usuario', id).leftJoin('projetos', 'projetos.id_contratante', 'usuarios.id_usuario').leftJoin('roteiros', 'roteiros.id_usuario_relation', 'usuarios.id_usuario').leftJoin('cursos', 'cursos.id_professor', 'usuarios.id_usuario').then((data) => {
       console.log(data);
       const usuario = {
         id_usuario: data[0].id_usuario,
@@ -45,7 +45,8 @@ class UserModel {
         pergunta_professor_3: data[0].pergunta_professor_3,
         freelancer_verificado: data[0].freelancer_verificado,
         projetos: [],
-        roteiros: []
+        roteiros: [],
+        cursos: [],
       }
 
       if(data[0].id_projeto){
@@ -76,6 +77,25 @@ class UserModel {
           };
           if(usuario.roteiros.find(el => el.id_roteiro == roadMap.id_roteiro) == undefined){
             usuario.roteiros.push(roadMap)
+          }
+        }));
+      }
+      if(data[0].id_curso){
+        data.forEach(((curso) => {
+          const course = {
+            id_curso: curso.id_curso,
+            nome: curso.nome,
+            descricao: curso.descricao,
+            pre_requisitos: curso.pre_requisitos,
+            nivel_curso: curso.nivel_curso,
+            aula_preview: curso.aula_preview,
+            valor: curso.valor,
+            is_publicado: curso.is_publicado,
+            is_aprovado: curso.is_aprovado,
+            id_categoria_curso_relation: curso.id_categoria_curso_relation
+          };
+          if(usuario.cursos.find(el => el.id_curso == course.id_curso) == undefined){
+            usuario.cursos.push(course)
           }
         }));
       }

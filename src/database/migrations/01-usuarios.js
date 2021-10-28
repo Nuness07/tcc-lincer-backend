@@ -23,8 +23,8 @@ exports.up = function (knex) {
     table.boolean('is_professor').notNullable();
     table.boolean('is_freelancer').notNullable();
     table.string('titulo_profissional', 160);
-    table.string('descricao_freelancer', 160);
-    table.string('experiencia_profissional', 160);
+    table.string('descricao_freelancer', 5000);
+    table.string('experiencia_profissional', 5000);
     table.string('principais_habilidades', 160);
     table.boolean('is_professor_aprovado');
     table.boolean('is_freelancer_aprovado');

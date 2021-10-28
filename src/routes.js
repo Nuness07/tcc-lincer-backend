@@ -14,6 +14,9 @@ const EquipController = require('./app/controllers/EquipController');
 const CategoryProjectController = require('./app/controllers/CategoryProjectController');
 const ProjectController = require('./app/controllers/ProjectController');
 
+const CategoryCursoController = require('./app/controllers/CategoryCursoController');
+const CursoController = require('./app/controllers/CursoController');
+
 
 
 
@@ -64,18 +67,32 @@ router.post('/categorias_projeto', CategoryProjectController.store);
 router.put('/categorias_projeto/:id', CategoryProjectController.update);
 router.delete('/categorias_projeto/:id', CategoryProjectController.delete);
 
-// Equipamentos
+// projetos
 router.get('/projetos', ProjectController.index);
 router.get('/projetos/:id', ProjectController.show);
 router.post('/projetos', ProjectController.store);
 router.put('/projetos/:id', ProjectController.update);
 router.delete('/projetos/:id', ProjectController.delete);
 
-// Equipamentos
+// roteiros
 router.get('/roteiros', RoadMapController.index);
 router.get('/roteiros/:id', RoadMapController.show);
 router.post('/roteiros', RoadMapController.store);
 router.put('/roteiros/:id', RoadMapController.update);
 router.delete('/roteiros/:id', RoadMapController.delete);
+
+// categoria de cursos
+router.get('/categorias_curso', CategoryCursoController.index);
+router.get('/categorias_curso/:id', CategoryCursoController.show);
+router.post('/categorias_curso', CategoryCursoController.store);
+router.put('/categorias_curso/:id', CategoryCursoController.update);
+router.delete('/categorias_curso/:id', CategoryCursoController.delete);
+
+// categoria de cursos
+router.get('/cursos', CursoController.index);
+router.get('/cursos/:id', CursoController.show);
+router.post('/cursos', CursoController.store);
+router.put('/cursos/:id', CursoController.update);
+router.delete('/cursos/:id', CursoController.delete);
 
 module.exports = router;

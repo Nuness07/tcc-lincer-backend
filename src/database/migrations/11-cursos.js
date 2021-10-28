@@ -5,12 +5,13 @@ exports.up = function (knex) {
     table.string('descricao', 45).notNullable();
     table.string('pre_requisitos', 45);
     table.string('nivel_curso', 45).notNullable();
-    table.float('valor').notNullable();
+    table.string('aula_preview', 200).notNullable();
+    table.string('valor').notNullable();
     table.boolean('is_publicado').notNullable();
     table.boolean('is_aprovado').notNullable();
 
     table
-      .uuid('id_categoria_curso')
+      .uuid('id_categoria_curso_relation')
       .references('id_categoria_curso')
       .inTable('categoria_cursos')
       .notNullable();

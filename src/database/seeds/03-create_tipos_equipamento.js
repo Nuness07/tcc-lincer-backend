@@ -1,5 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
-
 exports.seed = function (knex) {
   return knex('tipos_equipamentos')
     .del()
