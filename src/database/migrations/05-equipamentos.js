@@ -1,10 +1,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable('equipamentos', (table) => {
     table.uuid('id_equipamento').primary();
-    table.string('nome_equipamento', 45).notNullable();
-    table.string('descricao', 45).notNullable();
+    table.string('nome_equipamento', 100).notNullable();
+    table.string('descricao', 5000).notNullable();
     table.string('valor_mes', 45).notNullable();
-    table.string('especificacoes', 45).notNullable();
+    table.string('especificacoes', 5000).notNullable();
     table.string('fotos', 45).notNullable();
     table.string('marca', 45).notNullable();
     table.string('modelo', 45).notNullable();
