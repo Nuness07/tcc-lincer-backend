@@ -84,14 +84,14 @@ class UserModel {
         data.forEach(((curso) => {
           const course = {
             id_curso: curso.id_curso,
-            nome: curso.nome,
-            descricao: curso.descricao,
+            nome: curso.nome_curso,
+            descricao: curso.descricao_curso,
             pre_requisitos: curso.pre_requisitos,
             nivel_curso: curso.nivel_curso,
             aula_preview: curso.aula_preview,
             valor: curso.valor,
             is_publicado: curso.is_publicado,
-            is_aprovado: curso.is_aprovado,
+            is_aprovado: curso.is_aprovado_curso,
             id_categoria_curso_relation: curso.id_categoria_curso_relation
           };
           if(usuario.cursos.find(el => el.id_curso == course.id_curso) == undefined){

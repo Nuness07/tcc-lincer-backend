@@ -8,7 +8,36 @@ class CursoModel {
   }
 
   async findById(id) {
-    const [row] = await connection('cursos').where('id_curso', id);
+    let row = {}
+    await connection('cursos').select(['cursos.*', 'modulos.* as modulos']).where('id_curso', id).leftJoin('modulos', 'modulos.id_curso_relation', 'cursos.id_curso').then((data) => {
+      const curso = {
+        id_curso: data[0].id_curso,
+        nome_curso: data[0].nome_curso,
+        descricao: data[0].descricao,
+        pre_requisitos: data[0].pre_requisitos,
+        nivel_curso: data[0].nivel_curso,
+        aula_preview: data[0].aula_preview,
+        valor: data[0].valor,
+        is_publicado: data[0].is_publicado,
+        is_aprovado: data[0].is_aprovado,
+        id_categoria_curso_relation: data[0].id_categoria_curso_relation,
+        id_professor: data[0].id_professor,
+        modulos: []
+      }
+
+      if(data[0].id_modulo){
+        data.forEach(((modulo) => {
+          const module = {
+            id_modulo: modulo.id_modulo,
+            nome: modulo.nome_modulo
+          };
+          if(curso.modulos.find(el => el.id_modulo == module.id_modulo) == undefined){
+            curso.modulos.push(module)
+          }
+        }));
+      }
+      row = curso;
+    })
     return row;
   }
 

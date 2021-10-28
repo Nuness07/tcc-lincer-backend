@@ -16,6 +16,10 @@ const ProjectController = require('./app/controllers/ProjectController');
 
 const CategoryCursoController = require('./app/controllers/CategoryCursoController');
 const CursoController = require('./app/controllers/CursoController');
+const ModulosController = require('./app/controllers/ModulosController');
+const AulaController = require('./app/controllers/AulaController');
+
+
 
 
 
@@ -94,5 +98,19 @@ router.get('/cursos/:id', CursoController.show);
 router.post('/cursos', CursoController.store);
 router.put('/cursos/:id', CursoController.update);
 router.delete('/cursos/:id', CursoController.delete);
+
+// modulos de cursos
+router.get('/modulos', ModulosController.index);
+router.get('/modulos/:id', ModulosController.show);
+router.post('/modulos', ModulosController.store);
+router.put('/modulos/:id', ModulosController.update);
+router.delete('/modulos/:id', ModulosController.delete);
+
+// Aulas de módulos
+router.get('/aulas', AulaController.index);
+router.get('/aulas/:id', AulaController.show);
+router.post('/aulas', AulaController.store);
+router.put('/aulas/:id', AulaController.update);
+router.delete('/aulas/:id', AulaController.delete);
 
 module.exports = router;

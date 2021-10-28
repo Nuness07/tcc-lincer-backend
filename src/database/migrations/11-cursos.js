@@ -1,14 +1,14 @@
 exports.up = function (knex) {
   return knex.schema.createTable('cursos', (table) => {
     table.uuid('id_curso').primary();
-    table.string('nome', 45).notNullable();
-    table.string('descricao', 45).notNullable();
+    table.string('nome_curso', 45).notNullable();
+    table.string('descricao_curso', 4000).notNullable();
     table.string('pre_requisitos', 45);
     table.string('nivel_curso', 45).notNullable();
     table.string('aula_preview', 200).notNullable();
     table.string('valor').notNullable();
     table.boolean('is_publicado').notNullable();
-    table.boolean('is_aprovado').notNullable();
+    table.boolean('is_aprovado_curso').notNullable();
 
     table
       .uuid('id_categoria_curso_relation')
